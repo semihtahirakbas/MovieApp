@@ -6,5 +6,6 @@ target 'MovieApp' do
   use_frameworks!
 
   # Pods for MovieApp
+  pod 'Alamofire'
 
 end

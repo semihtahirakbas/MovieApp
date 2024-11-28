@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct HomeRowFilmView: View {
+    @StateObject private var movieViewModel = MovieViewModel()
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView(.horizontal){
+            LazyHStack{
+                ForEach(movieViewModel.movies, id: \._id){
+                    movie in HomeRowFilmItem(movie: movie)
+                }
+            }
+        }
     }
 }
 
-#Preview {
-    HomeRowFilmView()
+struct PlayView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeRowFilmView()
+    }
 }

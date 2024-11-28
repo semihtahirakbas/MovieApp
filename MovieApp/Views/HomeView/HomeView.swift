@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View{
+    
     var body: some View{
         ZStack{
             CustomBackgroundView()
@@ -19,12 +20,14 @@ struct HomeView: View{
                     IconButton(systemName: "magnifyingglass") {
                     }
                 }
+                HomeRowFilmView()
+                
                 Spacer()
             }.padding(.horizontal, 20)
         }
     }
 }
 
-#Preview{
+#Preview {
     HomeView()
 }
