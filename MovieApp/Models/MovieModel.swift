@@ -1,4 +1,4 @@
-struct Movie: Codable {
+struct MovieModel: Codable, Identifiable {
     let _id: String
     let id: String
     let primaryImage: Image?

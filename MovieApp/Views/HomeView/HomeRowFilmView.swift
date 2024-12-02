@@ -8,20 +8,40 @@
 import SwiftUI
 
 struct HomeRowFilmView: View {
-    @StateObject private var movieViewModel = MovieViewModel()
+    let movies: [MovieModel]
+    @State var title: String
+    
     var body: some View {
-        ScrollView(.horizontal){
-            LazyHStack{
-                ForEach(movieViewModel.movies, id: \._id){
-                    movie in HomeRowFilmItem(movie: movie)
+        VStack(alignment: .leading){
+            HStack{
+                Text(title)
+                    .foregroundStyle(.white)
+                    .font(Font.system(size: 24))
+                    .fontWeight(.medium)
+                Spacer()
+                NavigationLink{
+                    SeeAllDetailView(allMovies: movies)
+                } label:{
+                    Text("See All")
                 }
+                .foregroundStyle(.gray)
+            
             }
+            
+            ScrollView(.horizontal){
+                HStack{
+                    ForEach(movies, id: \._id){
+                        movie in HomeRowFilmItem(movie: movie)
+                    }
+                }
+            }.padding(0)
         }
+       
     }
 }
 
 struct PlayView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeRowFilmView()
+        HomeRowFilmView(movies: [], title: "Deneme")
     }
 }
