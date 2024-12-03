@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct HomeView: View{
-    @StateObject private var movieViewModel = MovieViewModel()
+    
+    @StateObject var movieViewModel: MovieViewModel
+    @State private var navigationStack: [RouterSteps] = []
+    
     var body: some View{
         
         switch movieViewModel.pageStatu {
@@ -23,26 +26,35 @@ struct HomeView: View{
                 CustomLoader()
             }
         case .success:
-            NavigationStack {
+            NavigationStack{
                 ZStack{
                     CustomBackgroundView()
                     ScrollView {
                         VStack{
-                            HStack{
-                                AvatarComponent(url: "https://avatars.githubusercontent.com/u/41877595?v=4")
-                                Spacer()
-                                IconButton(systemName: "magnifyingglass") {
-                                }
+                            HomeRowFilmView(movies: movieViewModel.newMovies, title: "New Movies"){
+                                navigationStack.append(.seeAllMovies(movies: movieViewModel.newMovies))
                             }
-                            HomeRowFilmView(movies: movieViewModel.newMovies, title: "New Movies").padding(.top,20)
-                            HomeRowFilmView(movies: movieViewModel.movies,title: "Trending Now").padding(.top,20)
-                            
-                            
+
+                            HomeRowFilmView(movies: movieViewModel.movies,title: "Trending" ){
+                                navigationStack.append(.seeAllMovies(movies: movieViewModel.movies))
+                            }.applyNavigation($navigationStack, router: movieViewModel.router)
+                                .padding(.top,20)
                             Spacer()
                             
-                            
                         }.padding(.horizontal, 20)
-                    }.refreshable {
+                    }.toolbar{
+                        ToolbarItem(placement: .topBarLeading){
+                            AvatarComponent(url: "https://avatars.githubusercontent.com/u/41877595?v=4")
+                           
+                        }
+                        ToolbarItem(placement: .topBarTrailing){
+                            IconButton(systemName:"magnifyingglass"){
+                                
+                            }
+                        }
+                    }
+
+                    .refreshable {
                         movieViewModel.fetchAllMovies()
                     }.onAppear{
                         UIRefreshControl.appearance().tintColor = .white
@@ -59,5 +71,5 @@ struct HomeView: View{
 }
 
 #Preview {
-    HomeView()
+    HomeView(movieViewModel: MovieViewModel(router: Router()))
 }

@@ -10,6 +10,8 @@ import SwiftUI
 struct HomeRowFilmView: View {
     let movies: [MovieModel]
     @State var title: String
+    var onNavigate: ()->Void
+    
     
     var body: some View {
         VStack(alignment: .leading){
@@ -19,12 +21,9 @@ struct HomeRowFilmView: View {
                     .font(Font.system(size: 24))
                     .fontWeight(.medium)
                 Spacer()
-                NavigationLink{
-                    SeeAllDetailView(allMovies: movies)
-                } label:{
-                    Text("See All")
+                Button("See All"){
+                    onNavigate()                    
                 }
-                .foregroundStyle(.gray)
             
             }
             
@@ -37,11 +36,5 @@ struct HomeRowFilmView: View {
             }.padding(0)
         }
        
-    }
-}
-
-struct PlayView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeRowFilmView(movies: [], title: "Deneme")
     }
 }

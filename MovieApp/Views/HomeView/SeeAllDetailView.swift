@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct SeeAllDetailView: View{
-    @State var allMovies: [MovieModel] = []
+    var allMovies: [MovieModel] = []
     @Environment(\.dismiss) var dissmiss
     let columns = Array(repeating: GridItem(.flexible(minimum: 200)), count: 2)
     var body: some View{
+        
         ZStack {
             CustomBackgroundView()
             ScrollView{
@@ -21,6 +22,8 @@ struct SeeAllDetailView: View{
                     }
                 }
             }
+            Text("Hello").foregroundStyle(.white)
+            
         }.navigationBarBackButtonHidden(true)
             .toolbar{
                 ToolbarItem(placement: .topBarLeading){

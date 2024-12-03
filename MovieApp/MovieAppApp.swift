@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct MovieAppApp: App {
+    private let router = Router()
+    
     var body: some Scene {
+        let router = Router()
         WindowGroup {
-            HomeView()
+            router.redirect(.home)
+                
         }
     }
 }
+
+

@@ -8,6 +8,7 @@ import Foundation
 import Alamofire
 
 class MovieViewModel: ObservableObject{
+    unowned var router: Router
     @Published var movies: [MovieModel] = []
     @Published var newMovies: [MovieModel] = []
     @Published var error: AFError?
@@ -15,8 +16,10 @@ class MovieViewModel: ObservableObject{
     
     private let movieRepo: MovieRepository = MovieRepository.instance
     
-    init(){
+    init(router: Router){
+        self.router = router
         fetchAllMovies()
+        
     }
     
     
