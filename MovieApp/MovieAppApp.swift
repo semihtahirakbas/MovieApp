@@ -14,7 +14,7 @@ struct MovieAppApp: App {
     var body: some Scene {
         let router = Router()
         WindowGroup {
-            router.redirect(.home)
+            router.redirect(.home).environment(\.colorScheme, .light)
         }
     }
 }

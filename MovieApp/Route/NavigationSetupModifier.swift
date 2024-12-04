@@ -23,12 +23,18 @@ struct NavigationSetupModifier: ViewModifier{
                     .navigationBarBackButtonHidden(true)
                     .toolbar(){
                         ToolbarItem(placement: .topBarLeading){
-                            Button(action: {
-                                $navigationStack.wrappedValue.removeLast()
-                            }){
-                                Label("", systemImage: "chevron.backward")
-                                    .foregroundStyle(.white)
-                            }.tint(.white)
+                            if step.id == "search"{
+                                
+                            }else{
+                                Button(action: {
+                                    $navigationStack.wrappedValue.removeLast()
+                                }){
+                                    Label("", systemImage: "chevron.backward")
+                                        .foregroundStyle(.white)
+                                }.tint(.white)
+                            }
+                            
+                            
                         }
                     }
             }
@@ -40,6 +46,8 @@ extension View{
     func applyNavigation(_ navigationStack: Binding<[RouterSteps]>, router: Router) -> some View{
         modifier(NavigationSetupModifier(navigationStack: navigationStack, router: router))
     }
+    
+    
 }
 
 
