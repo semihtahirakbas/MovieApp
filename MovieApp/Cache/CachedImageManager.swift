@@ -22,7 +22,7 @@ final class CachedImageManager: ObservableObject{
         self.currentState = .loading
         if let imageData = cache.object(forkey: imgURL as NSString){
             self.currentState = .success(data: imageData)
-            print("Image is loaded from the cache \(imgURL)")
+            //print("Image is loaded from the cache \(imgURL)")
             return
         }
         
@@ -32,7 +32,7 @@ final class CachedImageManager: ObservableObject{
             cache.set(object: data as NSData,
                       forkey: imgURL as NSString)
             
-            print("Caching Image")
+            //print("Caching Image")
             
         }catch{
             self.currentState = .failed(error: error)

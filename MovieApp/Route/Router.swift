@@ -18,6 +18,11 @@ extension Router{
             HomeView(movieViewModel: viewModel)
         case .seeAllMovies(let movies):
             SeeAllDetailView(allMovies: movies)
+        case .search:
+            let searchViewModel: SearchViewModel = SearchViewModel()
+            SearchView(viewModel: searchViewModel)
+        case .movieDetail(let movie):
+            MovieDetailView(item: movie)
                 
         }
     }

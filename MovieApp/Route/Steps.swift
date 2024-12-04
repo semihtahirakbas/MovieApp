@@ -11,6 +11,8 @@ enum RouterSteps: Steps{
     case home
     //Getting Collection of [MovieModel] from the parameter.
     case seeAllMovies(movies: [MovieModel])
+    case search
+    case movieDetail(item: MovieModel)
 }
 
 extension RouterSteps: Identifiable{
@@ -20,6 +22,10 @@ extension RouterSteps: Identifiable{
             "home"
         case .seeAllMovies:
             "seeAllMovies"
+        case .search:
+            "search"
+        case .movieDetail:
+            "movieDetail"
         }
     }
 }

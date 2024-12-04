@@ -10,6 +10,7 @@ import SwiftUI
 
 struct NavigationStackBindingModifier: ViewModifier{
     @Binding var navigationsTack: [RouterSteps]
+    @Environment(\.dismiss) var dismiss
     func body(content: Content) -> some View {
         content.environment(\.navigationStack, $navigationsTack)
     }
@@ -18,5 +19,6 @@ struct NavigationStackBindingModifier: ViewModifier{
 extension View{
     func navigationStackBinding(_ navigationStack: Binding<[RouterSteps]>) -> some View{
         modifier(NavigationStackBindingModifier(navigationsTack: navigationStack))
+        
     }
 }

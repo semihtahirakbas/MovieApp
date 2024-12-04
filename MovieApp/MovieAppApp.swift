@@ -15,7 +15,6 @@ struct MovieAppApp: App {
         let router = Router()
         WindowGroup {
             router.redirect(.home)
-                
         }
     }
 }

@@ -8,33 +8,32 @@
 import SwiftUI
 
 struct SeeAllDetailView: View{
+    
+    @Environment(\.navigationStack)
+    var navigationStack: Binding<[RouterSteps]>
+    @Environment(\.dismiss)
+    var dismiss
     var allMovies: [MovieModel] = []
-    @Environment(\.dismiss) var dissmiss
+
     let columns = Array(repeating: GridItem(.flexible(minimum: 200)), count: 2)
     var body: some View{
         
         ZStack {
+            
             CustomBackgroundView()
             ScrollView{
                 LazyVGrid(columns: columns){
                     ForEach(allMovies, id: \.id){movie in
                         HomeRowFilmItem(movie: movie)
+                            .onTapGesture {
+                                navigationStack.wrappedValue.append(.movieDetail(item: movie))
+                            }
                     }
                 }
-            }
-            Text("Hello").foregroundStyle(.white)
-            
-        }.navigationBarBackButtonHidden(true)
-            .toolbar{
-                ToolbarItem(placement: .topBarLeading){
-                    Button(action: {
-                        dissmiss()
-                    }){
-                        Label("Deneme", systemImage: "chevron.backward")
-                            .foregroundStyle(.white)
-                    }.tint(.white)
-                }
-            }
+                
+            }.padding()
+           
+        }
     }
 }
 #Preview {

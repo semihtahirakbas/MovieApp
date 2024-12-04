@@ -23,7 +23,7 @@ struct HomeRowFilmView: View {
                 Spacer()
                 Button("See All"){
                     onNavigate()                    
-                }
+                }.foregroundStyle(.white)
             
             }
             
@@ -37,4 +37,10 @@ struct HomeRowFilmView: View {
         }
        
     }
+}
+
+#Preview {
+    HomeRowFilmView(movies: [], title: "Deneme", onNavigate: {
+        
+    })
 }
